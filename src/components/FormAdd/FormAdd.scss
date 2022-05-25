@@ -1,0 +1,63 @@
+@import '../constants/colors';
+
+%bgi {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+%btn {
+    border: none;
+    cursor: pointer;
+    transition: opacity .3s;
+    background-color: transparent;
+
+    &:hover {
+        opacity: .5;
+    }
+}
+
+.form-add {
+    display: flex;
+    width: 350px;
+    margin: 0 auto;
+    background-color: $input-bg;
+    border-radius: 25px;
+
+    &__input {
+        height: 50px;
+        width: 100%;
+        background-color: transparent;
+        font-size: 24px;
+        color: $input;
+        padding: 0 5px 0 15px;
+        border: none;
+        border-radius: 25px 0 0 25px;
+    }
+
+    &__important-button {
+        width: 40px;
+        padding: 5px;
+        background-image: url('../../assets/images/icons/important-button-icon.svg');
+        @extend %bgi;
+        background-size: 30px 30px;
+        flex-shrink: 0;
+        @extend %btn;
+
+        &.active {
+            background-image: url('../../assets/images/icons/important-button-active-icon.svg');
+        }
+    }
+
+    &__add-button {
+        width: 55px;
+        flex-shrink: 0;
+        @extend %btn;
+        background-image: url('../../assets/images/icons/add-icon.svg');
+        @extend %bgi;
+        padding-left: 5px;
+        background-size: 50px 50px;
+        background-position: right center;
+        border-radius: 0 25px 25px 0;
+    }
+}
