@@ -8,7 +8,8 @@ export default {
             hasImportant: true,
             hasProcess: true,
             hasDone: false,
-        }
+        },
+        validError: '',
     },
     getters: {
     },
@@ -27,6 +28,10 @@ export default {
                 ...payload
             }
         },
+
+        setValidError(state, payload) {
+            state.validError = payload
+        }
     },
     actions: {
     }

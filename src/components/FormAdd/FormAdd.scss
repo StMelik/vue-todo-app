@@ -3,10 +3,15 @@
 
 .form-add {
     display: flex;
-    margin: 150px auto 30px;
+    margin: 150px auto 40px;
     background-color: $input-bg;
     border-radius: 25px;
     max-width: 500px;
+
+    &__label {
+        position: relative;
+        width: 100%;
+    }
 
     &__input {
         height: 50px;
@@ -25,6 +30,20 @@
 
         &::placeholder {
             color: $input;
+        }
+    }
+
+    &__error {
+        position: absolute;
+        color: $important;
+        bottom: -25px;
+        transform: translateY(-15px);
+        opacity: 0;
+        transition: all .5s;
+
+        &_active {
+            transform: translateY(0);
+            opacity: 1;
         }
     }
 
