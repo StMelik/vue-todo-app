@@ -1,81 +1,67 @@
 <template>
 <ol class="todo-list">
-  <li class="todo-list__item process">
-    <p class="todo-list__item-num">1. </p>
-    <p class="todo-list__item-text">Сходить в магазин</p>
-    <button class="todo-list__item-handle todo-list__item-handle_more"></button>
-    <div class="todo-list__item-context context-item">
-      <button class="context-item__button context-item__button_important context-item__button_important_active"></button>
-      <button class="context-item__button context-item__button_done"></button>
-      <button class="context-item__button context-item__button_delete"></button>
-    </div>
-  </li>
-
-  <li class="todo-list__item important">
-    <p class="todo-list__item-num">2. </p>
-    <p class="todo-list__item-text">Сходить в магазин</p>
-    <button class="todo-list__item-handle todo-list__item-handle_more"></button>
-    <div class="todo-list__item-context context-item context-item_mini">
-      <button class="context-item__button context-item__button_important"></button>
-      <button class="context-item__button context-item__button_done context-item__button_done_active"></button>
-      <button class="context-item__button context-item__button_delete"></button>
-    </div>
-  </li>
-
-  <li class="todo-list__item done">
-    <p class="todo-list__item-num">3. </p>
-    <p class="todo-list__item-text">Сходить в магазин</p>
-
-    <button class="todo-list__item-handle todo-list__item-handle_disabled"></button>
-
-    <div class="todo-list__item-context context-item context-item_hide">
-      <button class="context-item__button context-item__button_important"></button>
-      <button class="context-item__button context-item__button_done"></button>
-      <button class="context-item__button context-item__button_delete"></button>
-    </div>
-  </li>
-
-    <li class="todo-list__item done">
-    <p class="todo-list__item-num">4. </p>
-    <p class="todo-list__item-text">Сходить в магазин</p>
-    <button class="todo-list__item-handle todo-list__item-handle_close"></button>
-    <div class="todo-list__item-context context-item context-item_mini context-item_hide">
-      <button class="context-item__button context-item__button_important"></button>
-      <button class="context-item__button context-item__button_done"></button>
-      <button class="context-item__button context-item__button_delete"></button>
-    </div>
-  </li>
-
-    <li class="todo-list__item done">
-    <p class="todo-list__item-num">5. </p>
-    <p class="todo-list__item-text">Сходить в магазин</p>
-    <button class="todo-list__item-handle todo-list__item-handle_close"></button>
-    <div class="todo-list__item-context context-item context-item_mini">
-      <button class="context-item__button context-item__button_important"></button>
-      <button class="context-item__button context-item__button_done"></button>
-      <button class="context-item__button context-item__button_delete"></button>
-    </div>
-  </li>
-
-    <li class="todo-list__item done">
-    <p class="todo-list__item-num">6. </p>
-    <p class="todo-list__item-text">Сходить в магазин</p>
-    <button class="todo-list__item-handle todo-list__item-handle_more"></button>
-    <div class="todo-list__item-context context-item context-item_mini">
-      <button class="context-item__button context-item__button_important"></button>
-      <button class="context-item__button context-item__button_done"></button>
-      <button class="context-item__button context-item__button_delete"></button>
-    </div>
-  </li>
-
-
+  <TaskItem
+    v-for="(task, i) in taskList"
+    :key="task.id"
+    :task="task"
+    :index="i + 1"
+    @handleStatusTask="handleStatusTask"
+    @clickDeleteTask="clickDeleteTask"
+  />
 </ol>
   
 </template>
 
 <script>
-export default {
+import { mapMutations, mapState } from 'vuex';
+import TaskItem from '../TaskItem/TaskItem.vue';
 
+export default {
+  components: { TaskItem },
+
+    computed: {
+        ...mapState({
+            taskList: state => state.taskData.taskList,
+        })
+    },
+    methods: {
+        ...mapMutations({
+            addTask: "taskData/addTask",
+            setTaskStatus: "taskData/setTaskStatus",
+            deleteTask: "taskData/deleteTask",
+        }),
+        handleStatusTask(evt, id) {
+            const isImportantButton = evt.target.className.includes("important");
+            const isDoneButton = evt.target.className.includes("done");
+            const statusTask = this.taskList.find(item => item.id === id).status;
+            if (isImportantButton) {
+                if (statusTask === "important") {
+                    this.setTaskStatus({ id, status: "process" });
+                }
+                else {
+                    this.setTaskStatus({ id, status: "important" });
+                }
+            }
+            else if (isDoneButton) {
+                if (statusTask === "done") {
+                    this.setTaskStatus({ id, status: "process" });
+                }
+                else {
+                    this.setTaskStatus({ id, status: "done" });
+                }
+            }
+        },
+        clickDeleteTask(id) {
+            this.deleteTask(id);
+        }
+    },
+    mounted() {
+        // console.log(this.$refs.task);
+        // this.addTask({text: 'kyky'})
+    },
+    updated() {
+        console.log("UPDATED");
+    },
 }
 </script>
 
