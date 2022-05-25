@@ -3,19 +3,22 @@
   <FormAdd/>
   <AppTitle/>
   <AppFilter/>
+  <AppList/>
 </template>
 
 <script>
 import FormAdd from './components/FormAdd/FormAdd.vue'
 import AppTitle from './components/AppTitle/AppTitle.vue'
 import AppFilter from './components/AppFilter/AppFilter.vue'
+import AppList from './components/AppList/AppList.vue'
 
 export default {
   name: 'App',
   components: {
     FormAdd,
     AppTitle,
-    AppFilter
+    AppFilter,
+    AppList
 }
 }
 </script>
@@ -37,7 +40,7 @@ body {
   font-family: Inter, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  // text-align: center;
   color: #2c3e50;
   margin-top: 60px;
   max-width: 1140px;
