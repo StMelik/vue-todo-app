@@ -1,0 +1,16 @@
+%bgi {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+%btn {
+    border: none;
+    cursor: pointer;
+    transition: opacity .3s;
+    background-color: transparent;
+
+    &:hover {
+        opacity: .5;
+    }
+}

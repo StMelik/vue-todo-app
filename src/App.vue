@@ -1,15 +1,18 @@
 <template>
-  <form-add/>
+  <FormAdd/>
+  <AppTitle/>
 </template>
 
 <script>
 import FormAdd from './components/FormAdd/FormAdd.vue'
+import AppTitle from './components/AppTitle/AppTitle.vue'
 
 export default {
   name: 'App',
   components: {
-    FormAdd
-  }
+    FormAdd,
+    AppTitle,
+}
 }
 </script>
 
@@ -21,7 +24,7 @@ export default {
 }
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Inter, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
