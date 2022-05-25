@@ -11,3 +11,22 @@
         text-align: center;
     }
 }
+
+.list-enter-active,
+.list-leave-active {
+  transition: all .5s;
+}
+
+.list-enter-from {
+  opacity: 0;
+  transform: translateX(-50px);
+}
+
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(50px);
+}
+
+.list-move {
+    transition: transform .8s ease;
+  }

@@ -37,14 +37,14 @@
         position: absolute;
         color: $important;
         bottom: -25px;
-        transform: translateY(-15px);
-        opacity: 0;
-        transition: all .5s;
+        // transform: translateY(-15px);
+        // opacity: 0;
+        // transition: all .5s ease-out;
 
-        &_active {
-            transform: translateY(0);
-            opacity: 1;
-        }
+        // &_active {
+        //     transform: translateY(0);
+        //     opacity: 1;
+        // }
     }
 
     &__important-button {
@@ -72,4 +72,25 @@
         background-position: right center;
         border-radius: 0 25px 25px 0;
     }
+}
+
+.error-enter-active,
+.error-leave-active {
+  transition: all .3s;
+}
+
+.error-enter-from {
+    transform: translateY(-15px);
+    opacity: 0;
+}
+
+.error-enter-to,
+.error-leave-from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+.error-leave-to {
+    transform: translateY(15px);
+    opacity: 0;
 }

@@ -10,10 +10,13 @@
         @input="setTask($event.target.value)"
         ref="input"
       >
-      <p 
-        class="form-add__error"
-        :class="validError ? 'form-add__error_active' : ''"
+      <transition name="error">
+        <p 
+          class="form-add__error"
+          v-if="!!validError"
       >{{ validError }}</p>
+      </transition>
+      
     </label>
       
       <button 

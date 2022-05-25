@@ -3,14 +3,16 @@
         v-if="sortedTasks.length > 0"
         class="todo-list"
     >
-    <TaskItem
-        v-for="(task, i) in sortedTasks"
-        :key="task.id"
-        :task="task"
-        :index="i + 1"
-        @handleStatusTask="handleStatusTask"
-        @clickDeleteTask="clickDeleteTask"
-    />
+        <transition-group name="list">
+            <TaskItem
+                v-for="(task, i) in sortedTasks"
+                :key="task.id"
+                :task="task"
+                :index="i + 1"
+                @handleStatusTask="handleStatusTask"
+                @clickDeleteTask="clickDeleteTask"
+            />
+        </transition-group>
     </ol>
   <p 
     v-else
