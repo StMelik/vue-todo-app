@@ -74,6 +74,10 @@ export default {
             // if (task.contextHide !== status) {
             task.contextHide = status
             // }
+        },
+
+        clearList(state) {
+            state.taskList = state.taskList.filter(task => task.status !== 'done')
         }
     },
     actions: {
