@@ -30,6 +30,30 @@ export default {
         ]
     },
     getters: {
+        sortedTasks(state, _, rootState) {
+            const filters = rootState.appStatus.filters
+
+            const importantTasks = state.taskList.filter(task => task.status === 'important')
+            const processTasks = state.taskList.filter(task => task.status === 'process')
+            const doneTasks = state.taskList.filter(task => task.status === 'done')
+
+            if (filters.hasImportant && filters.hasProcess && filters.hasDone) {
+                return [...importantTasks, ...processTasks, ...doneTasks]
+            }
+
+            if (filters.hasImportant && filters.hasProcess) return [...importantTasks, ...processTasks]
+
+            if (filters.hasImportant && filters.hasDone) return [...importantTasks, ...doneTasks]
+
+            if (filters.hasProcess && filters.hasDone) return [...processTasks, ...doneTasks]
+
+            if (filters.hasImportant) return importantTasks
+
+            if (filters.hasProcess) return processTasks
+
+            if (filters.hasDone) return doneTasks
+        }
+
     },
     mutations: {
         addTask(state, payload) {
@@ -47,7 +71,9 @@ export default {
 
         setTaskContextHide(state, { id, status }) {
             const task = state.taskList.find(item => item.id === id)
+            // if (task.contextHide !== status) {
             task.contextHide = status
+            // }
         }
     },
     actions: {

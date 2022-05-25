@@ -57,11 +57,18 @@ export default {
 
     addMouseEvent(id) {
       this.$refs.task.addEventListener('mouseenter', () => {
-        this.setTaskContextHide({id, status: false})
+        console.log('mouseEnter');
+        if (this.task.contextHide !== false) {
+          this.setTaskContextHide({id, status: false})
+        }
+        
       })
 
       this.$refs.todo.addEventListener('mouseleave', () => {
+        console.log('mouseLeave');
+        if (this.task.contextHide !== true) {
           this.setTaskContextHide({id, status: true})
+        }
       })
     }
     

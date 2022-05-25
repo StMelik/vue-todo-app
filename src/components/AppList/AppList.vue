@@ -1,7 +1,7 @@
 <template>
 <ol class="todo-list">
   <TaskItem
-    v-for="(task, i) in taskList"
+    v-for="(task, i) in sortedTasks"
     :key="task.id"
     :task="task"
     :index="i + 1"
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { mapMutations, mapState } from 'vuex';
+import { mapGetters, mapMutations, mapState } from 'vuex';
 import TaskItem from '../TaskItem/TaskItem.vue';
 
 export default {
@@ -22,6 +22,10 @@ export default {
     computed: {
         ...mapState({
             taskList: state => state.taskData.taskList,
+        }),
+
+        ...mapGetters({
+            sortedTasks: 'taskData/sortedTasks'
         })
     },
     methods: {
@@ -58,6 +62,7 @@ export default {
     mounted() {
         // console.log(this.$refs.task);
         // this.addTask({text: 'kyky'})
+        // console.log(this.sortedTasks);
     },
     updated() {
         console.log("UPDATED");
