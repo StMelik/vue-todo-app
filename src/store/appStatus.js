@@ -4,7 +4,7 @@ export default {
     state: {
         task: '',
         isImortantTask: false,
-        filter: {
+        filters: {
             hasImportant: true,
             hasProcess: true,
             hasDone: false,
@@ -21,10 +21,10 @@ export default {
             state.isImortantTask = payload
         },
 
-        setFilter(state, payload) {
-            state.filter = {
-                ...state.filter,
-                payload
+        setFilters(state, payload) {
+            state.filters = {
+                ...state.filters,
+                ...payload
             }
         },
     },

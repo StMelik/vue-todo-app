@@ -17,19 +17,19 @@
         color: $disabled;
         transition: all .3s;
 
-        &_important.active  {
+        &_important-active  {
                 border-color: $important;
                 background-color: $important-bg;
                 color: $important;
         }
 
-        &_process.active  {
+        &_process-active  {
                 border-color: $process;
                 background-color: $process-bg;
                 color: $process;
         }
 
-        &_done.active  {
+        &_done-active  {
                 border-color: $done;
                 background-color: $done-bg;
                 color: $done;
