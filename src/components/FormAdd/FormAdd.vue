@@ -36,7 +36,8 @@ export default {
     ...mapMutations({
       setTask: 'appStatus/setTask',
       setIsImortantTask: 'appStatus/setIsImortantTask',
-      addTask: 'taskData/addTask'
+      addTask: 'taskData/addTask',
+      setFilters: 'appStatus/setFilters'
     }),
 
     handleIsImortantTask() {
@@ -55,6 +56,13 @@ export default {
         status: this.isImortantTask ? 'important' : 'process',
       }
 
+    if (newTask.status === 'important') {
+      this.setFilters({hasImportant: true})
+    } else {
+      this.setFilters({hasProcess: true})
+    }
+
+  
     this.addTask(newTask)
     this.setTask('')
     this.setIsImortantTask(false)

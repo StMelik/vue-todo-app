@@ -1,4 +1,13 @@
+@import '../../constants/colors.scss';
+
 .todo-list {
-    margin: 0 auto 150px;
+    margin: 0 0 150px;
     width: max-content;
+    
+
+    &__warning {
+        font-size: 30px;
+        color: $text;
+        text-align: center;
+    }
 }

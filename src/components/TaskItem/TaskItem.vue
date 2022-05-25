@@ -49,6 +49,7 @@ export default {
 
     handleStatusTask(evt, id) {
       this.$emit('handleStatusTask', evt, id)
+      this.setTaskContextHide({id, status: true})
     },
 
     clickDeleteTask(id) {

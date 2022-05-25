@@ -1,15 +1,21 @@
 <template>
-<ol class="todo-list">
-  <TaskItem
-    v-for="(task, i) in sortedTasks"
-    :key="task.id"
-    :task="task"
-    :index="i + 1"
-    @handleStatusTask="handleStatusTask"
-    @clickDeleteTask="clickDeleteTask"
-  />
-</ol>
-  
+    <ol 
+        v-if="sortedTasks.length > 0"
+        class="todo-list"
+    >
+    <TaskItem
+        v-for="(task, i) in sortedTasks"
+        :key="task.id"
+        :task="task"
+        :index="i + 1"
+        @handleStatusTask="handleStatusTask"
+        @clickDeleteTask="clickDeleteTask"
+    />
+    </ol>
+  <p 
+    v-else
+    class="todo-list__warning"
+    >Список задач пуст</p>
 </template>
 
 <script>
@@ -33,6 +39,7 @@ export default {
             addTask: "taskData/addTask",
             setTaskStatus: "taskData/setTaskStatus",
             deleteTask: "taskData/deleteTask",
+            loadTaskList: "taskData/loadTaskList",
         }),
         handleStatusTask(evt, id) {
             const isImportantButton = evt.target.className.includes("important");
@@ -60,9 +67,10 @@ export default {
         }
     },
     mounted() {
-        // console.log(this.$refs.task);
-        // this.addTask({text: 'kyky'})
-        // console.log(this.sortedTasks);
+        if (localStorage.getItem('todoList')) {
+            this.loadTaskList(JSON.parse(localStorage.getItem('todoList')))
+        }
+        
     },
     updated() {
         console.log("UPDATED");

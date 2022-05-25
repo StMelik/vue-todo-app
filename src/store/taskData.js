@@ -5,28 +5,10 @@ export default {
         taskList: [
             {
                 id: Date.now(),
-                text: 'Посмотреть фильм',
+                text: 'TEST удалить',
                 contextHide: true,
                 status: 'process', // important | done | process
-            },
-            {
-                id: Date.now() + 1,
-                text: 'Пробежка',
-                contextHide: true,
-                status: 'done', // important | done | process
-            },
-            {
-                id: Date.now() + 2,
-                text: 'Купить продукты',
-                contextHide: true,
-                status: 'important', // important | done | process
-            },
-            {
-                id: Date.now() + 3,
-                text: 'Настроить интернет',
-                contextHide: true,
-                status: 'process', // important | done | process
-            },
+            }
         ]
     },
     getters: {
@@ -52,21 +34,26 @@ export default {
             if (filters.hasProcess) return processTasks
 
             if (filters.hasDone) return doneTasks
+
+            return []
         }
 
     },
     mutations: {
-        addTask(state, payload) {
-            state.taskList.push(payload)
+        addTask(state, task) {
+            state.taskList.push(task)
+            localStorage.setItem('todoList', JSON.stringify(state.taskList))
         },
 
         setTaskStatus(state, { id, status }) {
             const task = state.taskList.find(item => item.id === id)
             task.status = status
+            localStorage.setItem('todoList', JSON.stringify(state.taskList))
         },
 
         deleteTask(state, id) {
             state.taskList = state.taskList.filter(task => task.id !== id)
+            localStorage.setItem('todoList', JSON.stringify(state.taskList))
         },
 
         setTaskContextHide(state, { id, status }) {
@@ -78,6 +65,11 @@ export default {
 
         clearList(state) {
             state.taskList = state.taskList.filter(task => task.status !== 'done')
+            localStorage.setItem('todoList', JSON.stringify(state.taskList))
+        },
+
+        loadTaskList(state, loadList) {
+            state.taskList = loadList
         }
     },
     actions: {
