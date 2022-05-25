@@ -1,0 +1,38 @@
+@import '../constants/colors';
+@import '../constants/templates';
+
+.filter {
+    display: flex;
+    justify-content: center;
+    column-gap: 25px;
+
+    &__button {
+        @extend %btn;
+        border: 1px solid $disabled;
+        font-size: 20px;
+        padding: 8px 15px;
+        max-height: 40px;
+        border-radius: 20px;
+        color: $disabled;
+        transition: all .3s;
+
+        &_important.active  {
+                border-color: $important;
+                background-color: $important-bg;
+                color: $important;
+        }
+
+        &_process.active  {
+                border-color: $process;
+                background-color: $process-bg;
+                color: $process;
+        }
+
+        &_done.active  {
+                border-color: $done;
+                background-color: $done-bg;
+                color: $done;
+        }
+
+    }
+}
