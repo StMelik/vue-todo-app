@@ -21,7 +21,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import './components/constants/colors';
+@import './constants/colors';
 
 * {
   margin: 0;

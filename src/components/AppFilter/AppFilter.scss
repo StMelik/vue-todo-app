@@ -1,5 +1,5 @@
-@import '../constants/colors';
-@import '../constants/templates';
+@import '../../constants/colors.scss';
+@import '../../constants/templates.scss';
 
 .filter {
     display: flex;
@@ -33,6 +33,5 @@
                 background-color: $done-bg;
                 color: $done;
         }
-
     }
 }

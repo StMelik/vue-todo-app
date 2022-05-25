@@ -1,28 +1,12 @@
-@import '../constants/colors';
-
-%bgi {
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-}
-
-%btn {
-    border: none;
-    cursor: pointer;
-    transition: opacity .3s;
-    background-color: transparent;
-
-    &:hover {
-        opacity: .5;
-    }
-}
+@import '../../constants/colors.scss';
+@import '../../constants/templates.scss';
 
 .form-add {
     display: flex;
-    width: 350px;
     margin: 0 auto;
     background-color: $input-bg;
     border-radius: 25px;
+    max-width: 500px;
 
     &__input {
         height: 50px;
