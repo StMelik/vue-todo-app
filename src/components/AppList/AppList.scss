@@ -63,6 +63,10 @@
         &_close {
             background-image: url(../../assets/images/icons/close-icon.svg);
         }
+
+        &_disabled {
+            display: none;
+        }
         
     }
 }
@@ -74,7 +78,12 @@
     height: 35px;
     border-radius: 35px;
     width: 150px;
-    // overflow: hidden;
+    transform: translate(0);
+    visibility: visible;
+    opacity: 1;
+    /* настроить*/
+    transition: transform .5s, opacity .3s, visibility .3s; 
+    overflow: hidden;
 
     &::after,
     &::before {
@@ -102,10 +111,19 @@
         &_important {
             background-image: url(../../assets/images/icons/important.svg);
             
+            &_active {
+                background-image: url(../../assets/images/icons/important-active.svg);
+                background-color: $important-bg;
+            }
         }
 
         &_done {
             background-image: url(../../assets/images/icons/done-icon.svg);
+
+            &_active {
+                background-image: url(../../assets/images/icons/done-active-icon.svg);
+                background-color: $done-bg;
+            }
         }
 
         &_delete {
@@ -114,7 +132,7 @@
     }
 }
 
-.context-item_mini.context-item {
+.context-item.context-item_mini {
     width: 100px;
 
     &::after {
@@ -124,4 +142,10 @@
     .context-item__button_important {
         display: none;
     }
+}
+
+.context-item.context-item_hide {
+    transform: translateX(-350%);
+    visibility: hidden;
+    opacity: 0;
 }
