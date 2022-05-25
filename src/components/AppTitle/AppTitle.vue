@@ -4,6 +4,7 @@
   <button 
     class="clear-button"
     @click="clearList"
+    title="Очистить выполненные задачи"
   >Очистить</button>
 </div>
   

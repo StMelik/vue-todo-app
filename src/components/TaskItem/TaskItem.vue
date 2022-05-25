@@ -14,14 +14,17 @@
       <button 
         class="context-item__button context-item__button_done"
         @click="handleStatusTask($event, task.id)"
+        title="Отметить задачу выполненной"
       ></button>
       <button 
         class="context-item__button context-item__button_important"
         @click="handleStatusTask($event, task.id)"
+        title="Отметить задачу важной"
       ></button>
       <button
         class="context-item__button context-item__button_delete"
         @click="clickDeleteTask(task.id)"
+        title="Удалить задачу"
       ></button>
     </div>
   </li>

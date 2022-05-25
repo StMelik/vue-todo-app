@@ -16,7 +16,6 @@
           v-if="!!validError"
       >{{ validError }}</p>
       </transition>
-      
     </label>
       
       <button 
@@ -24,8 +23,12 @@
         :class="isImortantTask && 'form-add__important-button_active'"
         type="button"
         @click="handleIsImortantTask"
+        title="Отметить задачу важной"
       ></button>
-      <button class="form-add__add-button"></button>
+      <button 
+        class="form-add__add-button"
+        title="Добавить задачу"
+      ></button>
   </form>
 </template>
 

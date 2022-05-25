@@ -4,16 +4,19 @@
     class="filter__button filter__button_important"
     :class="filters.hasImportant && 'filter__button_important-active'"
     @click="handleStateFilters"
+    title="Показывать / скрывать важные задачи"
   >Важные ({{getImportantTasks.length}})</button>
   <button 
     class="filter__button filter__button_process"
     :class="filters.hasProcess && 'filter__button_process-active'"
     @click="handleStateFilters"
+    title="Показывать / скрывать выполняемые задачи"
   >В процессе ({{getProcessTasks.length}})</button>
   <button 
     class="filter__button filter__button_done"
     :class="filters.hasDone && 'filter__button_done-active'"
     @click="handleStateFilters"
+    title="Показывать / скрывать выполненные задачи"
   >Выполненные ({{getDoneTasks.length}})</button>
 </div>
   
