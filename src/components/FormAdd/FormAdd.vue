@@ -7,6 +7,7 @@
         required
         :value="task"
         @input="setTask($event.target.value)"
+        ref="input"
       >
       <button 
         class="form-add__important-button"
@@ -35,6 +36,7 @@ export default {
     ...mapMutations({
       setTask: 'appStatus/setTask',
       setIsImortantTask: 'appStatus/setIsImortantTask',
+      addTask: 'taskData/addTask'
     }),
 
     handleIsImortantTask() {
@@ -46,13 +48,32 @@ export default {
     },
 
     handleSubmitForm() {
-      console.log(`Добавленна задача: ${this.task}`);
-      this.setTask('')
+      const newTask = {
+        id: Date.now(),
+        text: this.task,
+        contextHide: true,
+        status: this.isImortantTask ? 'important' : 'process',
+      }
+
+    this.addTask(newTask)
+    this.setTask('')
+    this.setIsImortantTask(false)
+    this.focusInput()
+    },
+
+    focusInput() {
+      this.$refs.input.focus()
     }
   },
 
+watch: {
+  isImortantTask() {
+    this.focusInput()
+  }
+},
+
   mounted() {
-    console.log(this.task);
+    this.focusInput()
   }
 }
 </script>
