@@ -4,23 +4,23 @@
     class="filter__button filter__button_important"
     :class="filters.hasImportant && 'filter__button_important-active'"
     @click="handleStateFilters"
-  >Важные</button>
+  >Важные ({{getImportantTasks.length}})</button>
   <button 
     class="filter__button filter__button_process"
     :class="filters.hasProcess && 'filter__button_process-active'"
     @click="handleStateFilters"
-  >В процессе</button>
+  >В процессе ({{getProcessTasks.length}})</button>
   <button 
     class="filter__button filter__button_done"
     :class="filters.hasDone && 'filter__button_done-active'"
     @click="handleStateFilters"
-  >Выполненные</button>
+  >Выполненные ({{getDoneTasks.length}})</button>
 </div>
   
 </template>
 
 <script>
-import { mapMutations, mapState } from 'vuex';
+import { mapGetters, mapMutations, mapState } from 'vuex';
 
 export default {
 
@@ -28,6 +28,12 @@ export default {
   computed: {
     ...mapState({
       filters: state => state.appStatus.filters,
+    }),
+
+    ...mapGetters({
+      getImportantTasks: 'taskData/getImportantTasks',
+      getProcessTasks: 'taskData/getProcessTasks',
+      getDoneTasks: 'taskData/getDoneTasks',
     })
   },
 

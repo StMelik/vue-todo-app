@@ -3,21 +3,32 @@ export default {
 
     state: {
         taskList: [
-            {
-                id: Date.now(),
-                text: 'TEST удалить',
-                contextHide: true,
-                status: 'process', // important | done | process
-            }
+            // {
+            //     id: Date.now(),
+            //     text: 'TEST удалить',
+            //     contextHide: true,
+            //     status: 'process', // important | done | process
+            // }
         ]
     },
     getters: {
-        sortedTasks(state, _, rootState) {
-            const filters = rootState.appStatus.filters
+        getImportantTasks(state) {
+            return state.taskList.filter(task => task.status === 'important')
+        },
 
-            const importantTasks = state.taskList.filter(task => task.status === 'important')
-            const processTasks = state.taskList.filter(task => task.status === 'process')
-            const doneTasks = state.taskList.filter(task => task.status === 'done')
+        getProcessTasks(state) {
+            return state.taskList.filter(task => task.status === 'process')
+        },
+
+        getDoneTasks(state) {
+            return state.taskList.filter(task => task.status === 'done')
+        },
+
+        sortedTasks(_, getters, rootState) {
+            const filters = rootState.appStatus.filters
+            const importantTasks = getters.getImportantTasks
+            const processTasks = getters.getProcessTasks
+            const doneTasks = getters.getDoneTasks
 
             if (filters.hasImportant && filters.hasProcess && filters.hasDone) {
                 return [...importantTasks, ...processTasks, ...doneTasks]
