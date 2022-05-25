@@ -2,13 +2,15 @@
 @import '../../constants/templates.scss';
 
 .todo-list {
+    margin: 0 auto 150px;
+    width: max-content;
 
     &__item {
         display: flex;
         column-gap: 15px;
         font-size: 32px;
         align-items: center;
-    
+        
 
         &:not(:last-of-type) {
             margin-bottom: 25px;
