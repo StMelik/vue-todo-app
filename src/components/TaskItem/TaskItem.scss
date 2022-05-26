@@ -1,5 +1,6 @@
-@import '../../constants/colors.scss';
-@import '../../constants/templates.scss';
+@import '@/constants/colors.scss';
+@import '@/constants/templates.scss';
+@import '@/constants/icons.scss';
 
 .todo-list__item {
     display: flex;
@@ -94,16 +95,16 @@
         transition: all .3s;
         
         &_important {
-            background-image: url(../../assets/images/icons/important.svg);
+            background-image: $important-icon;
             
         }
 
         &_done {
-            background-image: url(../../assets/images/icons/done-icon.svg);
+            background-image: $done-icon;
         }
 
         &_delete {
-            background-image: url(../../assets/images/icons/delete-icon.svg);
+            background-image: $delete-icon;
         }
     }
 }
@@ -121,13 +122,13 @@
         }
 
         .context-item__button_done {
-            background-image: url(../../assets/images/icons/done-active-icon.svg);
+            background-image: $done-active-icon;
             background-color: $done-bg;
         }
     }
 
     &.important .context-item__button_important {
-        background-image: url(../../assets/images/icons/important-active.svg);
+        background-image: $important-active-icon;
         background-color: $important-bg;
     }
 }

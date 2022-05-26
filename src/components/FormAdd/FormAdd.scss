@@ -1,5 +1,6 @@
-@import '../../constants/colors.scss';
-@import '../../constants/templates.scss';
+@import '@/constants/colors.scss';
+@import '@/constants/templates.scss';
+@import '@/constants/icons.scss';
 
 .form-add {
     position: relative;
@@ -50,14 +51,14 @@
     &__important-button {
         width: 40px;
         padding: 5px;
-        background-image: url('../../assets/images/icons/important-button-icon.svg');
+        background-image: $important-button-icon;
         @extend %bgi;
         background-size: 30px 30px;
         flex-shrink: 0;
         @extend %btn;
 
         &_active {
-            background-image: url('../../assets/images/icons/important-button-active-icon.svg');
+            background-image: $important-button-active-icon;
         }
     }
 
@@ -65,7 +66,7 @@
         width: 55px;
         flex-shrink: 0;
         @extend %btn;
-        background-image: url('../../assets/images/icons/add-icon.svg');
+        background-image: $add-icon;
         @extend %bgi;
         padding-left: 5px;
         background-size: 50px 50px;

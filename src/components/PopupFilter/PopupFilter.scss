@@ -1,5 +1,6 @@
-@import '../../constants/colors.scss';
-@import '../../constants/templates.scss';
+@import '@/constants/colors.scss';
+@import '@/constants/templates.scss';
+@import '@/constants/icons.scss';
 
 .popup {
     position: fixed;
@@ -44,7 +45,7 @@
         right: 25px;
         width: 40px;
         height: 40px;
-        background-image: url('../../assets/images/icons/close-button-icon.svg');
+        background-image: $close-button;
     }
 
     &__button {
