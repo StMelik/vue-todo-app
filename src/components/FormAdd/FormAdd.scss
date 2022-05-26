@@ -2,14 +2,18 @@
 @import '../../constants/templates.scss';
 
 .form-add {
+    position: relative;
     display: flex;
     margin: 150px auto 40px;
     background-color: $input-bg;
     border-radius: 25px;
     max-width: 500px;
 
+    @media screen and (max-width: 1440px) {
+        margin-top: calc(50px + (150 - 50) * ((100vw - 320px) / (1440 - 320)));
+    }
+
     &__label {
-        position: relative;
         width: 100%;
     }
 
@@ -37,14 +41,10 @@
         position: absolute;
         color: $important;
         bottom: -25px;
-        // transform: translateY(-15px);
-        // opacity: 0;
-        // transition: all .5s ease-out;
 
-        // &_active {
-        //     transform: translateY(0);
-        //     opacity: 1;
-        // }
+        @media screen and (max-width: 768px) {
+            font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (768 - 320)));
+        }
     }
 
     &__important-button {

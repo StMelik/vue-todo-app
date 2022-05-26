@@ -11,6 +11,8 @@
     background-color: transparent;
 
     &:hover {
-        opacity: .5;
+        @media(hover: hover) and (pointer: fine) {
+            opacity: .5;
+        }
     }
 }

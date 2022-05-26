@@ -10,6 +10,8 @@ export default {
             hasDone: false,
         },
         validError: '',
+        isMobile: navigator.userAgent.toLowerCase().includes('mobile'),
+        isOpenPopup: false,
     },
     getters: {
     },
@@ -31,6 +33,10 @@ export default {
 
         setValidError(state, payload) {
             state.validError = payload
+        },
+
+        setIsOpenPopup(state, payload) {
+            state.isOpenPopup = payload
         }
     },
     actions: {

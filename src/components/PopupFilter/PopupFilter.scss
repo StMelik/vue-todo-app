@@ -1,0 +1,138 @@
+@import '../../constants/colors.scss';
+@import '../../constants/templates.scss';
+
+.popup-filter {
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    padding-top: 120px;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 50px;
+    align-items: center;
+    background-color: $bg-popup;
+    box-shadow: $bg inset 0px 0px 50px;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 90px;
+        right: 10px;
+        left: 10px;
+        height: 6px;
+        background-color: $bg;
+        border-radius: 5px;
+    }
+
+    &__close {
+        @extend %btn;
+        @extend %bgi;
+        position: absolute;
+        top: 25px;
+        right: 25px;
+        width: 40px;
+        height: 40px;
+        background-image: url('../../assets/images/icons/close-button-icon.svg');
+    }
+
+    &__button {
+        @extend %btn;
+        border: 1px solid $disabled;
+        font-size: 24px;
+        padding: 8px 15px;
+        border-radius: 50px;
+        color: $disabled;
+        transition: all .3s;
+        white-space: nowrap;
+
+        &::after {
+            content: '';
+            position: absolute;
+            left: 10px;
+            right: 10px;
+            height: 6px;
+            background-color: $bg;
+        }
+
+        &_important::after {
+            top: 188px;
+        }
+
+        &_important-active  {
+            border-color: $important;
+            background-color: $important-bg;
+            color: $important;
+        }
+
+        &_process::after {
+            top: 284px;
+        }
+
+        &_process-active  {
+            border-color: $process;
+            background-color: $process-bg;
+            color: $process;
+        }
+
+        &_done::after {
+            top: 380px;
+        }
+
+        &_done-active  {
+            border-color: $done;
+            background-color: $done-bg;
+            color: $done;
+        }
+
+        &_clear {
+            border-color: $delete;
+            color: $delete;
+
+            &::after {
+                content: none;
+            }
+        }
+    }
+}
+
+.open-filter {
+    @extend .popup-filter__close;
+    display: none;
+    position: fixed;
+    background-image: url('../../assets/images/icons/filter-icon.svg');
+    border: 2px solid $input;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    background-size: 40px 40px;
+    top: auto;
+    bottom: 25px;
+    opacity: .5;
+
+    @media screen and (max-width: 620px) {
+        display: block;
+    }
+}
+
+
+.popup-enter-active,
+.popup-leave-active {
+  transition: transform .5s, opacity .3s;
+}
+
+
+.popup-enter-from,
+.popup-leave-to {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.popup-enter-to,
+.popup-leave-from {
+    opacity: 1;
+    transform: translateX(0%);
+}
+

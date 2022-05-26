@@ -7,6 +7,10 @@
     column-gap: 25px;
     margin-bottom: 40px;
 
+    @media screen and (max-width: 620px) {
+        display: none;
+    }
+
     &__button {
         @extend %btn;
         border: 1px solid $disabled;
@@ -16,6 +20,7 @@
         border-radius: 20px;
         color: $disabled;
         transition: all .3s;
+        white-space: nowrap;
 
         &_important-active  {
                 border-color: $important;

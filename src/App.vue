@@ -4,6 +4,9 @@
   <AppTitle/>
   <AppFilter/>
   <AppList/>
+  <teleport to="body">
+    <PopupFilter/>
+  </teleport>
 </template>
 
 <script>
@@ -11,6 +14,7 @@ import FormAdd from './components/FormAdd/FormAdd.vue'
 import AppTitle from './components/AppTitle/AppTitle.vue'
 import AppFilter from './components/AppFilter/AppFilter.vue'
 import AppList from './components/AppList/AppList.vue'
+import PopupFilter from './components/PopupFilter/PopupFilter.vue'
 
 export default {
   name: 'App',
@@ -18,7 +22,8 @@ export default {
     FormAdd,
     AppTitle,
     AppFilter,
-    AppList
+    AppList,
+    PopupFilter
 }
 }
 </script>

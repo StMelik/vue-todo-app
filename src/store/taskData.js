@@ -24,6 +24,8 @@ export default {
             return state.taskList.filter(task => task.status === 'done')
         },
 
+
+        // get дописать
         sortedTasks(_, getters, rootState) {
             const filters = rootState.appStatus.filters
             const importantTasks = getters.getImportantTasks

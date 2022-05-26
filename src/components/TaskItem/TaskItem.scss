@@ -6,6 +6,13 @@
     column-gap: 15px;
     font-size: 32px;
     align-items: center;
+    max-width: fit-content;
+
+    @media screen and (max-width: 768px) {
+        font-size: calc(26px + (32 - 26) * ((100vw - 320px) / (768 - 320)));
+
+        column-gap: calc(8px + (15 - 8) * ((100vw - 320px) / (768 - 320)));
+    }
 
     &:not(:last-of-type) {
         margin-bottom: 25px;
@@ -44,30 +51,12 @@
     font-size: 24px;
     padding: 5px 15px;
     border: 1px solid;
-    border-radius: 50px;
-    position: relative;
+    border-radius: 20px;
     z-index: 5;
-}
 
-.todo-list__item-handle {
-    @extend %btn;
-    @extend %bgi;
-    width: 35px;
-    height: 35px;
-    display: none;
-    
-    &_more {
-        background-image: url(../../assets/images/icons/more-icon.svg);
+    @media screen and (max-width: 768px) {
+        font-size: calc(20px + (24 - 20) * ((100vw - 320px) / (768 - 320)));
     }
-    
-    &_close {
-        background-image: url(../../assets/images/icons/close-icon.svg);
-    }
-    
-    @media (pointer: coarse) and (any-pointer: coarse) {
-        display: block;
-    }
-    
 }
 
 .context-item {
@@ -77,12 +66,8 @@
     height: 35px;
     border-radius: 35px;
     width: 150px;
-    transform: translate(0);
-    visibility: visible;
-    opacity: 1;
-    /* настроить*/
-    transition: transform .5s, opacity .3s, visibility .3s; 
     overflow: hidden;
+    flex-shrink: 0;
 
     &::after,
     &::before {
@@ -106,7 +91,7 @@
         padding: 5px 0;
         background-size: 25px 25px;
         transition: all .3s;
-
+        
         &_important {
             background-image: url(../../assets/images/icons/important.svg);
             
@@ -146,8 +131,21 @@
     }
 }
 
-.context-item.context-item_hide {
+.context-item-enter-active,
+.context-item-leave-active {
+  transition: transform .5s, opacity .3s, visibility .3s;
+}
+
+.context-item-enter-from,
+.context-item-leave-to {
     transform: translateX(-40%);
     visibility: hidden;
     opacity: 0;
 }
+
+.context-item-enter-to,
+.context-item-leave-from {
+    transform: translateX(0);
+    visibility: visible;
+    opacity: 1;
+  }

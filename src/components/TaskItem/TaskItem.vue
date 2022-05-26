@@ -6,10 +6,10 @@
   >
     <p class="todo-list__item-num">{{ index }}. </p>
     <p ref="task" class="todo-list__item-text">{{ task.text }}</p>
-    <button class="todo-list__item-handle todo-list__item-handle_more"></button>
-    <div 
+    <transition name="context-item">
+      <div 
       class="todo-list__item-context context-item "
-      :class="task.contextHide && 'context-item_hide'"
+      v-show="!task.contextHide"
     >
       <button 
         class="context-item__button context-item__button_done"
@@ -27,11 +27,12 @@
         title="Удалить задачу"
       ></button>
     </div>
+    </transition>
   </li>
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+import { mapMutations, mapState } from 'vuex';
 export default {
 
   props: {
@@ -45,41 +46,63 @@ export default {
     }
   },
 
+computed: {
+  ...mapState({
+    isMobile: state => state.appStatus.isMobile
+  })
+},
+
   methods: {
   ...mapMutations({
     setTaskContextHide: 'taskData/setTaskContextHide'
   }),
 
     handleStatusTask(evt, id) {
-      this.$emit('handleStatusTask', evt, id)
       this.setTaskContextHide({id, status: true})
+      this.$emit('handleStatusTask', evt, id)
     },
 
     clickDeleteTask(id) {
+      // this.setTaskContextHide({id, status: true})
       this.$emit('clickDeleteTask', id)
     },
 
     addMouseEvent(id) {
-      this.$refs.task.addEventListener('mouseenter', () => {
-        console.log('mouseEnter');
+        this.$refs.todo.addEventListener('mouseenter', () => {
+          console.log('mouseenter');
         if (this.task.contextHide !== false) {
           this.setTaskContextHide({id, status: false})
         }
-        
       })
 
       this.$refs.todo.addEventListener('mouseleave', () => {
-        console.log('mouseLeave');
+        console.log('mouseleave');
         if (this.task.contextHide !== true) {
           this.setTaskContextHide({id, status: true})
         }
       })
+    },
+    handleVisibleContextMenu(id) {
+        const button = this.$refs.task
+        // const statusContextMenu = this.task.contextHide
+
+        button.addEventListener('pointerup', () => {
+          this.setTaskContextHide({id, status: !this.task.contextHide})
+        })
+        
+    },
+
+    handleContextMenu(id) {
+      if (this.isMobile) {
+        this.handleVisibleContextMenu(id)
+      } else {
+        this.addMouseEvent(id)
+      }
     }
-    
   },
 
   mounted() {
-    this.addMouseEvent(this.task.id)
+    this.handleContextMenu(this.task.id)
   }
 }
 </script>

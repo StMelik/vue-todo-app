@@ -5,12 +5,29 @@
     display: flex;
     align-items: baseline;
     justify-content: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    position: relative;
 }
 
 .title {
     color: $text;
     font-size: 40px;
+    
+    
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background-color: $input;
+    }
+
+    @media screen and (max-width: 768px) {
+        font-size: calc(36px + (40 - 36) * ((100vw - 320px) / (768 - 320)));
+    }
 }
 
 .clear-button {
@@ -20,4 +37,8 @@
     margin-left: 10px;
     font-style: italic;
     font-size: 16px;
+
+    @media screen and (max-width: 620px) {
+        display: none;
+    }
 }
