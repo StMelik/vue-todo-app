@@ -1,20 +1,18 @@
-@import '@/constants/colors.scss';
+@import "@/constants/colors.scss";
 
 .todo-list {
-    margin: 0 0 150px;
-    // width: max-content;
-    
+  margin: 0 0 150px;
 
-    &__warning {
-        font-size: 30px;
-        color: $text;
-        text-align: center;
-    }
+  &__warning {
+    font-size: 30px;
+    color: $text;
+    text-align: center;
+  }
 }
 
 .list-enter-active,
 .list-leave-active {
-  transition: all .5s;
+  transition: all 0.5s;
 }
 
 .list-enter-from {
@@ -28,5 +26,5 @@
 }
 
 .list-move {
-    transition: transform .8s ease;
-  }
+  transition: transform 0.8s ease;
+}

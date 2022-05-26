@@ -1,5 +1,5 @@
-@import '@/constants/colors.scss';
-@import '@/constants/templates.scss';
+@import "@/constants/colors.scss";
+@import "@/constants/templates.scss";
 
 .wrapper {
     display: flex;
@@ -12,11 +12,9 @@
 .title {
     color: $input;
     font-size: 40px;
-    
-    
 
     &::after {
-        content: '';
+        content: "";
         position: absolute;
         bottom: -5px;
         left: 0;

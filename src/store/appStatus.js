@@ -2,7 +2,7 @@ export default {
     namespaced: 'appStatus',
 
     state: {
-        task: '',
+        textTask: '',
         isImortantTask: false,
         filters: {
             hasImportant: true,
@@ -13,11 +13,10 @@ export default {
         isMobile: navigator.userAgent.toLowerCase().includes('mobile'),
         isOpenPopup: false,
     },
-    getters: {
-    },
+
     mutations: {
-        setTask(state, payload) {
-            state.task = payload
+        setTextTask(state, text) {
+            state.textTask = text
         },
 
         setIsImortantTask(state, payload) {
@@ -39,6 +38,4 @@ export default {
             state.isOpenPopup = payload
         }
     },
-    actions: {
-    }
 }

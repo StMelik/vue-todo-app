@@ -1,32 +1,23 @@
 <template>
-<div class="filter">
-  <button 
-    class="filter__button filter__button_important"
-    :class="filters.hasImportant && 'filter__button_important-active'"
-    @click="handleStateFilters"
-    title="Показывать / скрывать важные задачи"
-  >Важные ({{getImportantTasks.length}})</button>
-  <button 
-    class="filter__button filter__button_process"
-    :class="filters.hasProcess && 'filter__button_process-active'"
-    @click="handleStateFilters"
-    title="Показывать / скрывать выполняемые задачи"
-  >В процессе ({{getProcessTasks.length}})</button>
-  <button 
-    class="filter__button filter__button_done"
-    :class="filters.hasDone && 'filter__button_done-active'"
-    @click="handleStateFilters"
-    title="Показывать / скрывать выполненные задачи"
-  >Выполненные ({{getDoneTasks.length}})</button>
-</div>
-  
+  <div class="filter">
+    <button class="filter__button filter__button_important"
+      :class="{ 'filter__button_important-active': filters.hasImportant }" @click="handleStateFilters"
+      title="Показывать / скрывать важные задачи">Важные ({{ getImportantTasks.length }})</button>
+    <button class="filter__button filter__button_process"
+      :class="{ 'filter__button_process-active': filters.hasProcess }" @click="handleStateFilters"
+      title="Показывать / скрывать выполняемые задачи">В процессе
+      ({{ getProcessTasks.length }})</button>
+    <button class="filter__button filter__button_done" :class="{ 'filter__button_done-active': filters.hasDone }"
+      @click="handleStateFilters" title="Показывать / скрывать выполненные задачи">Выполненные
+      ({{ getDoneTasks.length }})</button>
+  </div>
 </template>
 
 <script>
 import { mapGetters, mapMutations, mapState } from 'vuex';
 
 export default {
-
+  name: 'AppFilter',
 
   computed: {
     ...mapState({
@@ -51,26 +42,18 @@ export default {
       const isDoneButton = evt.target.className.includes('done');
 
       if (isImportantButton) {
-        if (!this.filters.hasImportant) {
-          this.setFilters({hasImportant: true})
-        } else {
-          this.setFilters({hasImportant: false})
-        }
-      } else if (isProcessButton) {
-        if (!this.filters.hasProcess) {
-          this.setFilters({hasProcess: true})
-        } else {
-          this.setFilters({hasProcess: false})
-        }
-      } else if (isDoneButton) {
-        if (!this.filters.hasDone) {
-          this.setFilters({hasDone: true})
-        } else {
-          this.setFilters({hasDone: false})
-        }
+        this.setFilters({ hasImportant: !this.filters.hasImportant })
+      }
+
+      if (isProcessButton) {
+        this.setFilters({ hasProcess: !this.filters.hasProcess })
+      }
+
+      if (isDoneButton) {
+        this.setFilters({ hasDone: !this.filters.hasDone })
       }
     },
-  },
+  }
 }
 </script>
 

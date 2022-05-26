@@ -1,5 +1,5 @@
-@import '@/constants/colors.scss';
-@import '@/constants/templates.scss';
+@import "@/constants/colors.scss";
+@import "@/constants/templates.scss";
 
 .filter {
     display: flex;
@@ -19,25 +19,25 @@
         max-height: 40px;
         border-radius: 20px;
         color: $disabled;
-        transition: all .3s;
+        transition: all 0.3s;
         white-space: nowrap;
 
-        &_important-active  {
-                border-color: $important;
-                background-color: $important-bg;
-                color: $important;
+        &_important-active {
+            border-color: $important;
+            background-color: $important-bg;
+            color: $important;
         }
 
-        &_process-active  {
-                border-color: $process;
-                background-color: $process-bg;
-                color: $process;
+        &_process-active {
+            border-color: $process;
+            background-color: $process-bg;
+            color: $process;
         }
 
-        &_done-active  {
-                border-color: $done;
-                background-color: $done-bg;
-                color: $done;
+        &_done-active {
+            border-color: $done;
+            background-color: $done-bg;
+            color: $done;
         }
     }
 }

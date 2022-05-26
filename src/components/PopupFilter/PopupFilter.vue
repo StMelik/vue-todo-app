@@ -4,13 +4,13 @@
       <div class="popup-filter" ref="popup-menu" @click.stop>
         <button @click="setIsOpenPopup(false)" class="popup-filter__close"></button>
         <button class="popup-filter__button popup-filter__button_important"
-          :class="filters.hasImportant && 'popup-filter__button_important-active'" @click="handleStateFilters"
+          :class="{ 'popup-filter__button_important-active': filters.hasImportant }" @click="handleStateFilters"
           title="Показывать / скрывать важные задачи">Важные ({{ getImportantTasks.length }})</button>
         <button class="popup-filter__button popup-filter__button_process"
-          :class="filters.hasProcess && 'popup-filter__button_process-active'" @click="handleStateFilters"
+          :class="{ 'popup-filter__button_process-active': filters.hasProcess }" @click="handleStateFilters"
           title="Показывать / скрывать выполняемые задачи">В процессе ({{ getProcessTasks.length }})</button>
         <button class="popup-filter__button popup-filter__button_done"
-          :class="filters.hasDone && 'popup-filter__button_done-active'" @click="handleStateFilters"
+          :class="{ 'popup-filter__button_done-active': filters.hasDone }" @click="handleStateFilters"
           title="Показывать / скрывать выполненные задачи">Выполненные ({{ getDoneTasks.length }})</button>
         <button class="popup-filter__button popup-filter__button_clear" @click="clearList"
           title="Очистить выполненные задачи">Очистить</button>
@@ -23,6 +23,7 @@
 import { mapGetters, mapMutations, mapState } from 'vuex';
 
 export default {
+  name: 'PopupFilter',
 
   data() {
     return {
@@ -44,7 +45,6 @@ export default {
       getDoneTasks: 'taskData/getDoneTasks',
     }),
 
-    // проверить название и дельта заменить на расстояние?
     calculateDeltaTouchPosition() {
       return {
         deltaX: this.endX - this.startX,
@@ -66,36 +66,24 @@ export default {
       const isDoneButton = evt.target.className.includes('done');
 
       if (isImportantButton) {
-        if (!this.filters.hasImportant) {
-          this.setFilters({ hasImportant: true })
-        } else {
-          this.setFilters({ hasImportant: false })
-        }
-      } else if (isProcessButton) {
-        if (!this.filters.hasProcess) {
-          this.setFilters({ hasProcess: true })
-        } else {
-          this.setFilters({ hasProcess: false })
-        }
-      } else if (isDoneButton) {
-        if (!this.filters.hasDone) {
-          this.setFilters({ hasDone: true })
-        } else {
-          this.setFilters({ hasDone: false })
-        }
+        this.setFilters({ hasImportant: !this.filters.hasImportant })
+      }
+
+      if (isProcessButton) {
+        this.setFilters({ hasProcess: !this.filters.hasProcess })
+      }
+
+      if (isDoneButton) {
+        this.setFilters({ hasDone: !this.filters.hasDone })
       }
     },
 
-
-    // переписанный вариант работы попапа
     setStartTouchPosition(evt) {
-      console.log('start');
       this.startX = evt.changedTouches[0].clientX
       this.startY = evt.changedTouches[0].clientY
     },
 
     setEndTouchPosition(evt) {
-      console.log('end');
       this.endX = evt.changedTouches[0].clientX
       this.endY = evt.changedTouches[0].clientY
     },
@@ -109,23 +97,16 @@ export default {
 
   watch: {
     calculateDeltaTouchPosition(deltaTouch) {
-      console.log('calc', deltaTouch);
       this.closePopupScroll(deltaTouch)
     }
   },
 
   mounted() {
-    console.log('mounted');
     this.$refs['popup-menu'].addEventListener('touchstart', this.setStartTouchPosition)
     this.$refs['popup-menu'].addEventListener('touchend', this.setEndTouchPosition)
-  },
-
-  unmounted() {
-    console.log('unmounted');
   }
 }
 </script>
-
 
 <style lang="scss" scoped>
 @import './PopupFilter'

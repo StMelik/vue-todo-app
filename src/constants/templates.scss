@@ -7,12 +7,12 @@
 %btn {
     border: none;
     cursor: pointer;
-    transition: opacity .3s;
+    transition: opacity 0.3s;
     background-color: transparent;
 
     &:hover {
-        @media(hover: hover) and (pointer: fine) {
-            opacity: .5;
+        @media (hover: hover) and (pointer: fine) {
+            opacity: 0.5;
         }
     }
 }

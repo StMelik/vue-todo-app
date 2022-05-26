@@ -1,6 +1,6 @@
-@import '@/constants/colors.scss';
-@import '@/constants/templates.scss';
-@import '@/constants/icons.scss';
+@import "@/constants/colors.scss";
+@import "@/constants/templates.scss";
+@import "@/constants/icons.scss";
 
 .popup {
     position: fixed;
@@ -27,7 +27,7 @@
     box-shadow: $bg inset 0px 0px 50px;
 
     &::before {
-        content: '';
+        content: "";
         position: absolute;
         top: 90px;
         right: 10px;
@@ -55,11 +55,11 @@
         padding: 8px 15px;
         border-radius: 50px;
         color: $disabled;
-        transition: all .3s;
+        transition: all 0.3s;
         white-space: nowrap;
 
         &::after {
-            content: '';
+            content: "";
             position: absolute;
             left: 10px;
             right: 10px;
@@ -71,7 +71,7 @@
             top: 188px;
         }
 
-        &_important-active  {
+        &_important-active {
             border-color: $important;
             background-color: $important-bg;
             color: $important;
@@ -81,7 +81,7 @@
             top: 284px;
         }
 
-        &_process-active  {
+        &_process-active {
             border-color: $process;
             background-color: $process-bg;
             color: $process;
@@ -91,7 +91,7 @@
             top: 380px;
         }
 
-        &_done-active  {
+        &_done-active {
             border-color: $done;
             background-color: $done-bg;
             color: $done;
@@ -107,42 +107,3 @@
         }
     }
 }
-
-// .popup__close-button {
-//     @extend .popup-filter__close;
-//     display: none;
-//     position: fixed;
-//     z-index: 50;
-//     background-image: url('../../assets/images/icons/filter-icon.svg');
-//     border: 2px solid $input;
-//     border-radius: 50%;
-//     width: 60px;
-//     height: 60px;
-//     background-size: 40px 40px;
-//     top: auto;
-//     bottom: 25px;
-//     opacity: .5;
-
-//     @media screen and (max-width: 620px) {
-//         display: block;
-//     }
-// }
-
-
-// .popup-enter-active,
-// .popup-leave-active {
-//   transition: transform .4s, opacity .3s;
-// }
-
-// .popup-enter-from,
-// .popup-leave-to {
-//   opacity: 0;
-//   transform: translateX(100%);
-// }
-
-// .popup-enter-to,
-// .popup-leave-from {
-//     opacity: 1;
-//     transform: translateX(0%);
-// }
-

@@ -1,23 +1,14 @@
 <template>
-<div class="wrapper">
-  <h2 class="title">Ваши задачи</h2>
-  <button 
-    class="clear-button"
-    @click="clearList"
-    title="Очистить выполненные задачи"
-  >Очистить</button>
-</div>
-  
+  <div class="wrapper">
+    <h2 class="title">Ваши задачи</h2>
+    <button class="clear-button" @click="$store.commit('taskData/clearList')"
+      title="Очистить выполненные задачи">Очистить</button>
+  </div>
 </template>
-
 <script>
-import { mapMutations } from 'vuex'
+
 export default {
-  methods: {
-  ...mapMutations({
-    clearList: 'taskData/clearList'
-  })
-  }
+  name: 'AppTitle',
 }
 </script>
 

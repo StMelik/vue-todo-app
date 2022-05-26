@@ -1,32 +1,16 @@
 <template>
-  <li 
-    class="todo-list__item"
-    :class="task.status"
-    ref="todo"
-  >
+  <li class="todo-list__item" :class="task.status" ref="todo">
     <p class="todo-list__item-num">{{ index }}. </p>
     <p ref="task" class="todo-list__item-text">{{ task.text }}</p>
     <transition name="context-item">
-      <div 
-      class="todo-list__item-context context-item "
-      v-show="!task.contextHide"
-    >
-      <button 
-        class="context-item__button context-item__button_done"
-        @click="handleStatusTask($event, task.id)"
-        title="Отметить задачу выполненной"
-      ></button>
-      <button 
-        class="context-item__button context-item__button_important"
-        @click="handleStatusTask($event, task.id)"
-        title="Отметить задачу важной"
-      ></button>
-      <button
-        class="context-item__button context-item__button_delete"
-        @click="clickDeleteTask(task.id)"
-        title="Удалить задачу"
-      ></button>
-    </div>
+      <div class="todo-list__item-context context-item " v-show="!task.contextHide">
+        <button class="context-item__button context-item__button_done" @click="handleStatusTask($event, task.id)"
+          title="Отметить задачу выполненной"></button>
+        <button class="context-item__button context-item__button_important" @click="handleStatusTask($event, task.id)"
+          title="Отметить задачу важной"></button>
+        <button class="context-item__button context-item__button_delete" @click="deleteTask(task.id)"
+          title="Удалить задачу"></button>
+      </div>
     </transition>
   </li>
 </template>
@@ -34,6 +18,7 @@
 <script>
 import { mapMutations, mapState } from 'vuex';
 export default {
+  name: 'TaskItem',
 
   props: {
     task: {
@@ -46,63 +31,59 @@ export default {
     }
   },
 
-computed: {
-  ...mapState({
-    isMobile: state => state.appStatus.isMobile
-  })
-},
+  computed: {
+    ...mapState({
+      isMobile: state => state.appStatus.isMobile,
+      taskList: state => state.taskData.taskList,
+    })
+  },
 
   methods: {
-  ...mapMutations({
-    setTaskContextHide: 'taskData/setTaskContextHide'
-  }),
+    ...mapMutations({
+      setTaskContextHide: 'taskData/setTaskContextHide',
+      addTask: "taskData/addTask",
+      setTaskStatus: "taskData/setTaskStatus",
+      deleteTask: "taskData/deleteTask",
+      loadTaskList: "taskData/loadTaskList",
+    }),
 
     handleStatusTask(evt, id) {
-      this.setTaskContextHide({id, status: true})
-      this.$emit('handleStatusTask', evt, id)
-    },
+      const isImportantButton = evt.target.className.includes("important");
+      const isDoneButton = evt.target.className.includes("done");
+      const statusTask = this.taskList.find(item => item.id === id).status;
 
-    clickDeleteTask(id) {
-      // this.setTaskContextHide({id, status: true})
-      this.$emit('clickDeleteTask', id)
-    },
+      this.setTaskContextHide({ id, status: true })
 
-    addMouseEvent(id) {
-        this.$refs.todo.addEventListener('mouseenter', () => {
-          console.log('mouseenter');
-        if (this.task.contextHide !== false) {
-          this.setTaskContextHide({id, status: false})
-        }
-      })
-
-      this.$refs.todo.addEventListener('mouseleave', () => {
-        console.log('mouseleave');
-        if (this.task.contextHide !== true) {
-          this.setTaskContextHide({id, status: true})
-        }
-      })
-    },
-    handleVisibleContextMenu(id) {
-        const button = this.$refs.task
-        // const statusContextMenu = this.task.contextHide
-
-        button.addEventListener('pointerup', () => {
-          this.setTaskContextHide({id, status: !this.task.contextHide})
-        })
-        
-    },
-
-    handleContextMenu(id) {
-      if (this.isMobile) {
-        this.handleVisibleContextMenu(id)
-      } else {
-        this.addMouseEvent(id)
+      if (isImportantButton) {
+        statusTask === "important"
+          ? this.setTaskStatus({ id, status: "process" })
+          : this.setTaskStatus({ id, status: "important" })
       }
+
+      if (isDoneButton) {
+        statusTask === "done"
+          ? this.setTaskStatus({ id, status: "process" })
+          : this.setTaskStatus({ id, status: "done" })
+      }
+    },
+
+    changeContextOnMobile() {
+      this.setTaskContextHide({ id: this.task.id, status: !this.task.contextHide })
     }
   },
 
   mounted() {
-    this.handleContextMenu(this.task.id)
+    if (!this.isMobile) {
+      this.$refs.todo.addEventListener('mouseenter', () => {
+        this.setTaskContextHide({ id: this.task.id, status: false })
+      })
+
+      this.$refs.todo.addEventListener('mouseleave', () => {
+        this.setTaskContextHide({ id: this.task.id, status: true })
+      })
+    } else {
+      this.$refs.task.addEventListener('pointerup', this.changeContextOnMobile)
+    }
   }
 }
 </script>
