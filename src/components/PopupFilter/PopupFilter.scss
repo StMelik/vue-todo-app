@@ -102,6 +102,7 @@
     @extend .popup-filter__close;
     display: none;
     position: fixed;
+    z-index: 50;
     background-image: url('../../assets/images/icons/filter-icon.svg');
     border: 2px solid $input;
     border-radius: 50%;
